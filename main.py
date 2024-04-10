@@ -112,6 +112,8 @@ with pd.ExcelWriter('faculty_lists.xlsx', engine='openpyxl') as writer:
             df, sheet_name = site['handler'](site["url"], site["department_filter"], site["sheet_name"])
         else:
             df, sheet_name = site['handler'](site["url"], site["sheet_name"])
+
+        df = df.drop_duplicates()
         df.to_excel(writer, sheet_name=sheet_name, index=False)
 
 print("Faculty lists have been saved to 'faculty_lists.xlsx'.")
